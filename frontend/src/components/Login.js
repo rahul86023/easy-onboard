@@ -145,9 +145,10 @@ const Login = () => {
       .post("http://localhost:7000/auth/login", formData)
       .then((response) => {
         // Assuming the token is returned in the response
-        const token = response.data.data.token;
+        console.log(response.data);
+        const token = response.data.token;
         localStorage.setItem("token", token);
-        const user = JSON.stringify(response.data.data.user);
+        const user = JSON.stringify(response.data.user);
         localStorage.setItem("user", user);
 
         console.log(token, "token");

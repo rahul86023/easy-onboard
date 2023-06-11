@@ -58,7 +58,12 @@ const HrDashboard = () => {
   useEffect(() => {
     const getUsers = async () => {
       try {
-        const response = await axios.get("http://localhost:7000/admin/users");
+        const token = localStorage.getItem("token");
+        const response = await axios.get("http://localhost:7000/admin/users", {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
         setUsers(response.data);
       } catch (error) {
         console.error("Error fetching users:", error);
