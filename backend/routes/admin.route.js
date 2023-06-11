@@ -5,7 +5,21 @@ const { roles } = require("../utils/constants");
 const passport = require("passport");
 
 router.get(
-  "/users",
+  "/HRs",
+  passport.authenticate("jwt", { session: false }),
+
+  async (req, res, next) => {
+    try {
+      const users = await User.find({});
+
+      res.json(users);
+    } catch (error) {
+      next(error);
+    }
+  }
+);
+router.get(
+  "/employees",
   passport.authenticate("jwt", { session: false }),
 
   async (req, res, next) => {

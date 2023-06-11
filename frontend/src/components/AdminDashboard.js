@@ -61,7 +61,12 @@ const AdminDashboard = () => {
   useEffect(() => {
     const getUsers = async () => {
       try {
-        const response = await axios.get("http://localhost:7000/admin/users");
+        const token = localStorage.getItem("token");
+        const response = await axios.get("http://localhost:7000/admin/HRs", {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
         setUsers(response.data);
       } catch (error) {
         console.error("Error fetching users:", error);
@@ -76,14 +81,11 @@ const AdminDashboard = () => {
       const getUsers = async () => {
         try {
           const token = localStorage.getItem("token"); // Assuming the token is stored in localStorage
-          const response = await axios.get(
-            "http://localhost:7000/admin/users",
-            {
-              headers: {
-                Authorization: `Bearer ${token}`,
-              },
-            }
-          );
+          const response = await axios.get("http://localhost:7000/admin/HRs", {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          });
           setUsers(response.data);
         } catch (error) {
           console.error("Error fetching users:", error);
